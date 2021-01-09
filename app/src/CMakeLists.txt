@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 project(NiScrcpy)
 
-set(CMAKE_CXX_STANDARD 14)
+#set(CMAKE_CXX_STANDARD 14)
 
 include_directories(/usr/local/Cellar/ffmpeg/4.3.1_4/include/)
 include_directories(./)
