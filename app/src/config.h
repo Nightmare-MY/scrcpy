@@ -4,6 +4,7 @@
  */
 
 #pragma once
+#define NDEBUG
 
 #define DEFAULT_BIT_RATE 8000000
 
@@ -17,8 +18,6 @@
 
 #define HIDPI_SUPPORT
 
-#define NDEBUG
-
 #undef PORTABLE
 
 #define PREFIX "/usr/local"
@@ -28,4 +27,3 @@
 #undef SERVER_DEBUGGER
 
 #define SERVER_DEBUGGER_METHOD_NEW
-
