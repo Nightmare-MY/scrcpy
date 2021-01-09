@@ -13,7 +13,7 @@ link_directories(/usr/local/Cellar/sdl2/2.0.12_1/lib)
 aux_source_directory(. SRC_LIST) # 搜索当前目录下的所有.cpp文件
 
 
-add_executable(NiScrcpy ${SRC_LIST} ./util/str_util.c  ./util/net.c ./sys/unix/command.c )
+add_library(NiScrcpy SHARED ${SRC_LIST} ./util/str_util.c  ./util/net.c ./sys/unix/command.c )
 
 target_link_libraries(
         NiScrcpy
