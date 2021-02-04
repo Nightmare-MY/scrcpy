@@ -508,6 +508,5 @@ end:
     }
 
     server_destroy(&server);
-
     return ret;
 }

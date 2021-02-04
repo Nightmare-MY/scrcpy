@@ -106,6 +106,8 @@ push_server(const char *serial) {
 
 static bool
 enable_tunnel_reverse(const char *serial, uint16_t local_port) {
+    system("adb reverse localabstract:scrcpy tcp:27183");
+    return true;
     process_t process = adb_reverse(serial, SOCKET_NAME, local_port);
     return process_check_success(process, "adb reverse");
 }
@@ -162,6 +164,7 @@ enable_tunnel_reverse_any_port(struct server *server,
         if (server->server_socket != INVALID_SOCKET) {
             // success
             server->local_port = port;
+            LOGE("adasdasas ->%d",port);
             return true;
         }
 
@@ -422,16 +425,29 @@ server_start(struct server *server, const char *serial,
             return false;
         }
     }
-
-    if (!push_server(serial)) {
-        goto error1;
-    }
-
+    system("adb push /Users/nightmare/Desktop/scrcpy_source/scrcpy/app/scrcpy-server /data/local/tmp/scrcpy-server.jar");
+    // TODO
+    // push scrcpy-server.jar 到设备上
+    // if (!push_server(serial)) {
+    //     goto error1;
+    // }
+    // system("echo reverse");
+    // system("adb forward tcp:27186 localabstract:scrcpy");
+    // system("adb reverse localabstract:scrcpy tcp:27183");
+    // server->tunnel_forward=true;
+    // server->tunnel_enabled=true;
+    // server->local_port=27183;
     if (!enable_tunnel_any_port(server, params->port_range,
                                 params->force_adb_forward)) {
         goto error1;
     }
-
+    system("echo 咱们代码");
+    int p=fork();
+    if(p==0){
+        system("adb shell CLASSPATH=/data/local/tmp/scrcpy-server.jar app_process / com.genymobile.scrcpy.Server 1.17 info 0 8000000 0 -1 false - true true 0 false false - -");
+    }
+    // sleep
+    system("echo 咱们代码2");
     // server will connect to our server socket
     server->process = execute_server(server, params);
     if (server->process == PROCESS_NONE) {

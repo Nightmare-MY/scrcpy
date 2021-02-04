@@ -104,6 +104,10 @@ show_adb_err_msg(enum process_result err, const char *const argv[]) {
 
 process_t
 adb_execute(const char *serial, const char *const adb_cmd[], size_t len) {
+    for(int i=0;i<len;i++){
+
+    LOGE("%s",adb_cmd[i]);
+    }
     const char *cmd[len + 4];
     int i;
     process_t process;
